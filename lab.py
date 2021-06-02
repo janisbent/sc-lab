@@ -38,19 +38,20 @@ import numpy as np
 import binascii
 import matplotlib.pyplot as plt
 
+
 # Listening port for our data capture server
 SERVER_ADDR = 'woodbad.pythonanywhere.com'
 SERVER_PORT = 80
 
 
-def plot_helper(data,
-            smooth=1,
-            decimate=1,
-            tracedata_label='tracedata',
-            value_label='data',
-            label_decode=True,
-            result_label='result',
-            **kwargs):
+def plot_trace(data,
+              smooth=1,
+              decimate=1,
+              tracedata_label='tracedata',
+              value_label='data',
+              label_decode=True,
+              result_label='result',
+              **kwargs):
     """
     Helper function for plotting data returned by client.
 
@@ -97,6 +98,8 @@ def plot_helper(data,
 
     # Plot the data, passing along any additional arguments
     plt.plot(data_to_plot, label=label, **kwargs)
+    plt.xlabel('Time')
+    plt.ylabel('Power consumption')
 
     # Show the legend
     plt.legend()
