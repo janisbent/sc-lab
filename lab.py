@@ -46,6 +46,7 @@ SERVER_PORT = 80
 
 def plot_trace(data,
               smooth=1,
+              crop=None,
               decimate=1,
               tracedata_label='tracedata',
               value_label='data',
@@ -90,6 +91,13 @@ def plot_trace(data,
     if decimate > 1:
         data_to_plot = data_to_plot[::decimate]
 
+    if crop:
+        s, e = crop
+        data_to_plot = data_to_plot[s: e]
+        rng = range(s, e)
+    else:
+        rng = range(len(data_to_plot))
+
     # Check if the device indicated success
     if data.get(result_label, None) == 'Password correct':
         label += ' CORRECT!!!!' 
@@ -97,7 +105,7 @@ def plot_trace(data,
         label += ' (incorrect)'
 
     # Plot the data, passing along any additional arguments
-    plt.plot(data_to_plot, label=label, **kwargs)
+    plt.plot(rng, data_to_plot, label=label, **kwargs)
     plt.xlabel('Time')
     plt.ylabel('Power consumption')
 
@@ -190,3 +198,7 @@ class DataClient(object):
             result['tracedata'] = np.frombuffer(binascii.unhexlify(result['tracedata'])) # Python 2-3
 
         return result
+
+    def fetch_and_plot(self, values, *args, **kwargs):
+        result = self.fetch(values)
+        plot_trace(result, *args, **kwargs)
