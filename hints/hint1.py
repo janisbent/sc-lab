@@ -24,7 +24,7 @@ after a certain point in time.
 
 
 %matplotlib widget
-plot_trace(dc.fetch('0000'), 100)
-plot_trace(dc.fetch('0000'), 100)
-plot_trace(dc.fetch('0000'), 100)
-plot_trace(dc.fetch('0000'), 100)
+door.unlock("0000", 25)
+door.unlock("0000", 25)
+door.unlock("0000", 25)
+door.unlock("0000", 25)

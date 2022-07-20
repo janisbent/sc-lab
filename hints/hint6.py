@@ -28,4 +28,4 @@ plt.plot([925, 940, 972, 990], [.0199, .0205, .015, .0138], 'ro:', linewidth=10)
 
 # key guesses
 for i in range(10):
-    dc.fetch_and_plot(f'{i}000', 25, (900, 1000))
+    door.unlock(f'{i}000', 25, (900, 1000))
