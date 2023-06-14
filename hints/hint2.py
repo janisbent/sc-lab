@@ -4,9 +4,9 @@ Check out the below man page for strcmp.
 What are the possible return values?
 
 What impacts could different return values have on the structure of the power trace?
+'''
 
-
-
+print('''
 STRCMP(3)                BSD Library Functions Manual                STRCMP(3)
 
 NAME
@@ -46,4 +46,4 @@ STANDARDS
      (``ISO C90'').
 
 BSD                            October 11, 2001                            BSD
-'''
+''')

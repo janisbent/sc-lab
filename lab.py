@@ -45,16 +45,16 @@ SERVER_ADDR = "woodbad.pythonanywhere.com"
 SERVER_PORT = 80
 
 
-class Door:
+class Pump:
     """
-    HTTP data client to request side-channel captures from the door server.
+    HTTP data client to request side-channel captures from the pump server.
 
     Example:
-    door = Door()
-    data = door.fetch_trace("3333")
-    door.plot_trace(data, 6, (100, 200))
+    pump = Door()
+    pump = door.fetch_trace("3333")
+    pump.plot_trace(data, 6, (100, 200))
     # or simply
-    door.unlock("3333", 6, (100, 200))
+    pump.enter("3333", 6, (100, 200))
     """
 
     BASIC_PATH = "passwordtrigger"
@@ -64,9 +64,6 @@ class Door:
     def __init__(
         self,
         address=f"{SERVER_ADDR}:{SERVER_PORT}",
-        path=BASIC_PATH,
-        labels=None,
-        seed=None,
     ):
         """
         address: 'HOST:PORT' address of server
@@ -74,9 +71,9 @@ class Door:
         label: parameter label for data to pass
         """
         self.address = address
-        self.path = path
-        self.labels = labels if labels is not None else ["value"]
-        self.seed = seed
+        self.path = self.BASIC_PATH
+        self.labels = ["value"]
+        self.seed = None
 
     def _gen_url(self, parameters: Dict = None):
         """
@@ -206,6 +203,6 @@ class Door:
         plt.draw()
         plt.show(block=False)
 
-    def unlock(self, values, *args, **kwargs):
+    def enter(self, values, *args, **kwargs):
         result = self.fetch_trace(values)
         self.plot_trace(result, *args, **kwargs)

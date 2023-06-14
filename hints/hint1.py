@@ -24,7 +24,7 @@ after a certain point in time.
 
 
 %matplotlib widget
-door.unlock("0000", 25)
-door.unlock("0000", 25)
-door.unlock("0000", 25)
-door.unlock("0000", 25)
+pump.enter("0000", 25)
+pump.enter("0000", 25)
+pump.enter("0000", 25)
+pump.enter("0000", 25)
