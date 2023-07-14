@@ -57,16 +57,16 @@ class Door:
     door.unlock("3333", 6, (100, 200))
     """
 
-    BASIC_PATH = "passwordtrigger"
-    MED_PATH = "password"
-    ADV_PATH = "passworddiversify"
+    BASIC = "passwordtrigger"
+    MED = "password"
+    ADV = "passworddiversify"
 
     def __init__(
         self,
         address=f"{SERVER_ADDR}:{SERVER_PORT}",
-        path=BASIC_PATH,
+        path=BASIC,
         labels=None,
-        seed=None,
+        seed="12345678",
     ):
         """
         address: 'HOST:PORT' address of server
@@ -76,7 +76,11 @@ class Door:
         self.address = address
         self.path = path
         self.labels = labels if labels is not None else ["value"]
-        self.seed = seed
+        self.seed = seed.ljust(8, "x")
+
+    @staticmethod
+    def _error(msg: str):
+        print(f"\x1b[31mERROR: {msg}\x1b[0m")
 
     def _gen_url(self, parameters: Dict = None):
         """
@@ -101,8 +105,8 @@ class Door:
         if isinstance(values, str):
             values = [values.encode("utf-8")]
         if len(values) != len(self.labels):
-            print(
-                "Error: length of function 'values' parameter must match class "
+            self._error(
+                "length of function 'values' parameter must match class "
                 "'labels' parameter"
             )
             return {}
@@ -116,7 +120,9 @@ class Door:
 
         resp = requests.get(self._gen_url(params))
         if resp.status_code != 200:
-            print(f"Fetch failed with code {resp.status_code}: {resp.content.decode()}")
+            self._error(
+                f"Fetch failed with code {resp.status_code}: {resp.content.decode()}"
+            )
             return None
 
         try:
@@ -208,4 +214,5 @@ class Door:
 
     def unlock(self, values, *args, **kwargs):
         result = self.fetch_trace(values)
-        self.plot_trace(result, *args, **kwargs)
+        if result is not None:
+            self.plot_trace(result, *args, **kwargs)
