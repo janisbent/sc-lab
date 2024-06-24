@@ -16,9 +16,8 @@ How does this help us decipher future pin guesses?
 NOTE: if the key is in the way of the plot, you can drag the triangle at the bottom right corner
 of the plot window to change the size of the plot
 '''
-%matplotlib widget
-import matplotlib.pyplot as plt
 
+plt.figure()
 # group 1
 plt.plot([925, 975], [.0199, .0145], 'go:', linewidth=10)
 # group 2
