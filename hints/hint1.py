@@ -23,7 +23,7 @@ after a certain point in time.
 '''
 
 
-%matplotlib widget
+plt.figure()
 door.unlock("0000", 25)
 door.unlock("0000", 25)
 door.unlock("0000", 25)

@@ -209,8 +209,8 @@ class Door:
 
         # Show the legend
         plt.legend()
-        plt.draw()
-        plt.show(block=False)
+        #plt.draw()
+        #plt.show(block=False)
 
     def unlock(self, values, *args, **kwargs):
         result = self.fetch_trace(values)
